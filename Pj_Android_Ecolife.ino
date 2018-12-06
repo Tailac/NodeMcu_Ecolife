@@ -6,8 +6,8 @@
 #include <LiquidCrystal_I2C.h>
 
 //Configuração de conexão do NODEMCU com Servidor MQTT
-const char* ssid = "SAVIANI 2.4";
-const char* password = "SavianI.7";
+const char* ssid = "AndroidAP";
+const char* password = "snbj8460";
 const char* mqttServer = "m15.cloudmqtt.com";
 const int mqttPort = 15260;
 const char* mqttUser = "hzwxnzwy";
@@ -19,7 +19,7 @@ PubSubClient client(espClient);
 void mqtt_callback(char* topic, byte* dados_tcp, unsigned int length); 
 
 //Iniciação de variaveis - MOTOR DE PASSO
-const int stepsPerRevolution = 200;
+const int stepsPerRevolution = 50;
 Stepper myStepper(stepsPerRevolution, D5, D4, D3, D6);
 
 //Iniciação de variaveis - SENSOR ULTRASÔNICO
@@ -195,7 +195,7 @@ void toggleTrash(char op){
   //o = Open  / c = Close
   if (op == 'o' || op == 'O' || op == 'c' || op == 'C'){
       int dir = (op == 'c' || op == 'C') ? -1 : 1;
-      for(int i=0; i<50; i++){
+      for(int i=0; i<30; i++){
         myStepper.step(stepsPerRevolution*dir);
         delay(10);
       }
